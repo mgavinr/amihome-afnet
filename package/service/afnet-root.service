@@ -1,0 +1,17 @@
+[Unit]
+Description=AFNET Amiga FTP client network (for old or root only services)
+After=network.target
+
+[Service]
+Type=simple
+RestartSec=60
+WorkingDirectory=/etc/afnet/
+ExecStart=/etc/afnet/bin/afnet-service.sh
+ExecStop=/usr/bin/touch /etc/afnet/afnet-shutdown.txt
+ExecStop=/bin/sleep 5
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=afnet-root
+
+[Install]
+WantedBy=multi-user.target
